@@ -65,22 +65,22 @@ The smart contract is deployed on the **Stellar Testnet**.
 ## 📸 Screenshots
 
 ### Wallet Options Available
-![Wallet Options](https://via.placeholder.com/800x400?text=Wallet+Options+Available)
+![Wallet Options](/screenshots/wallet-options.png)
 
 ### Connected Wallet State
-![Connected Wallet](https://via.placeholder.com/800x400?text=Connected+Wallet+State)
+![Connected Wallet](/screenshots/connected-wallet.png)
 
 ### Transaction Success & Notification
-![Transaction Success](https://via.placeholder.com/800x400?text=Transaction+Success+Toast+Notification)
+![Transaction Success](/screenshots/transaction-success.png)
 
 ### Live Dashboard
-![Live Dashboard](https://via.placeholder.com/800x400?text=Live+Dashboard+Overview)
+![Live Dashboard](/screenshots/live-dashboard.png)
 
 ### Realtime Leaderboard
-![Leaderboard](https://via.placeholder.com/800x400?text=Realtime+Leaderboard)
+![Leaderboard](/screenshots/leaderboard.png)
 
 ### Activity Feed
-![Activity Feed](https://via.placeholder.com/800x400?text=Realtime+Activity+Feed)
+![Activity Feed](/screenshots/activity-feed.png)
 
 ---
 
@@ -97,17 +97,17 @@ All transactions executed via the UI can be verified directly on the Stellar tes
 
 ## 🌐 Live Demo
 
-- **Deployed Frontend URL:** [Deploy to Vercel and paste link here]
+- **Deployed Frontend URL:** [\[Deploy to Vercel and paste link here\]](https://stellar-lvl-2.vercel.app/)
 
 ---
 
 ## ✅ Final Submission Checklist
 
-- [x] multi-wallet integration
-- [x] deployed smart contract
-- [x] realtime events
-- [x] transaction tracking
-- [x] leaderboard updates
-- [x] activity feed
-- [x] wallet error handling
-- [x] contract interaction from frontend
+- [✅] multi-wallet integration
+- [✅] deployed smart contract
+- [✅] realtime events
+- [✅] transaction tracking
+- [✅] leaderboard updates
+- [✅] activity feed
+- [✅] wallet error handling
+- [✅] contract interaction from frontend
