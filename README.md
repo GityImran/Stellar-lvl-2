@@ -97,7 +97,7 @@ All transactions executed via the UI can be verified directly on the Stellar tes
 
 ## 🌐 Live Demo
 
-- **Deployed Frontend URL:** [\[Deploy to Vercel and paste link here\]](https://stellar-lvl-2.vercel.app/)
+- **Deployed Frontend URL:** [\[Vercel Link\]](https://stellar-lvl-2.vercel.app/)
 
 ---
 
