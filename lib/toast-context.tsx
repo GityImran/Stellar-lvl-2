@@ -19,7 +19,7 @@ export interface ToastItem {
 
 interface ToastContextType {
   toasts: ToastItem[];
-  showToast: (toast: Omit<ToastItem, "id">) => void;
+  showToast: (toast: Omit<ToastItem, "id">) => string;
   removeToast: (id: string) => void;
 }
 
@@ -43,6 +43,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
           removeToast(id);
         }, 5000);
       }
+      return id;
     },
     [removeToast]
   );

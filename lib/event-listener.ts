@@ -113,24 +113,27 @@ async function rpcGetEvents(
 
 // ─── Event normalisation ──────────────────────────────────────────────────────
 
+import { xdr, scValToNative } from "@stellar/stellar-sdk";
+
 /**
- * Attempts to decode the XDR/JSON value returned by the RPC for a topic or
- * value field.  The Soroban RPC returns objects like:
- *   { "type": "address", "value": "GABC..." }
- *   { "type": "bool",    "value": true }
- *   { "type": "u32",     "value": 42   }
- *   { "type": "sym",     "value": "NEW_BID" }
+ * Attempts to decode the XDR value returned by the RPC for a topic or value field.
  */
-function extractScVal(raw: string | { type: string; value: unknown }): unknown {
+function decodeScVal(raw: string | { type: string; value: unknown }): unknown {
   if (typeof raw === "string") {
     try {
-      const parsed = JSON.parse(raw);
-      if (parsed && typeof parsed === "object" && "value" in parsed) {
-        return parsed.value;
-      }
-      return parsed;
+      // Decode Base64 XDR directly
+      return scValToNative(xdr.ScVal.fromXDR(raw, "base64"));
     } catch {
-      return raw;
+      // Fallback if not valid XDR
+      try {
+        const parsed = JSON.parse(raw);
+        if (parsed && typeof parsed === "object" && "value" in parsed) {
+          return parsed.value;
+        }
+        return parsed;
+      } catch {
+        return raw;
+      }
     }
   }
   if (raw && typeof raw === "object" && "value" in raw) {
@@ -145,18 +148,19 @@ function normaliseEvent(raw: SorobanEvent): ContractEvent | null {
     const nameTopic = raw.topic?.[0];
     if (!nameTopic) return null;
 
-    const eventName = String(extractScVal(nameTopic as unknown as string)).toUpperCase();
+    const eventName = String(decodeScVal(nameTopic)).toUpperCase();
 
     const ledger = raw.ledger ?? 0;
     const timestamp = raw.ledgerClosedAt || new Date().toISOString();
     const eventId = raw.id || `${ledger}-${Math.random()}`;
 
+    // Values are published as a tuple: (user, amount) or (user, vote_yes)
+    const payload = decodeScVal(raw.value) as unknown[];
+    const user = String(payload?.[0] ?? "");
+
     // ── NEW_BID ──────────────────────────────────────────────────────────────
     if (eventName === "NEW_BID") {
-      // topic[1] = user address, value = amount
-      const user = String(extractScVal(raw.topic?.[1] as unknown as string) ?? "");
-      const amount = Number(extractScVal(raw.value as unknown as string) ?? 0);
-
+      const amount = Number(payload?.[1] ?? 0);
       const event: BidEvent = {
         kind: "NEW_BID",
         user,
@@ -170,9 +174,7 @@ function normaliseEvent(raw: SorobanEvent): ContractEvent | null {
 
     // ── NEW_VOTE ──────────────────────────────────────────────────────────────
     if (eventName === "NEW_VOTE") {
-      const user = String(extractScVal(raw.topic?.[1] as unknown as string) ?? "");
-      const voteYes = Boolean(extractScVal(raw.value as unknown as string));
-
+      const voteYes = Boolean(payload?.[1]);
       const event: VoteEvent = {
         kind: "NEW_VOTE",
         user,
@@ -186,9 +188,7 @@ function normaliseEvent(raw: SorobanEvent): ContractEvent | null {
 
     // ── PAYMENT ───────────────────────────────────────────────────────────────
     if (eventName === "PAYMENT") {
-      const user = String(extractScVal(raw.topic?.[1] as unknown as string) ?? "");
-      const amount = Number(extractScVal(raw.value as unknown as string) ?? 0);
-
+      const amount = Number(payload?.[1] ?? 0);
       const event: PaymentEvent = {
         kind: "PAYMENT",
         user,

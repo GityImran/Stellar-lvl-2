@@ -299,7 +299,7 @@ export default function LiveHubDashboard({ wallet }: LiveHubDashboardProps) {
   const [voteTx, setVoteTx] = useState<TxState>({ status: "idle", message: "" });
   const [paymentTx, setPaymentTx] = useState<TxState>({ status: "idle", message: "" });
 
-  const { showToast } = useToast();
+  const { showToast, removeToast } = useToast();
 
   // ─── Bootstrap contract state on mount ───────────────────────────────────
 
@@ -360,9 +360,10 @@ export default function LiveHubDashboard({ wallet }: LiveHubDashboardProps) {
       return;
     }
     setBidTx({ status: "pending", message: "Signing and submitting bid to Stellar testnet…" });
-    showToast({ type: "loading", title: "Placing Bid", message: "Submitting transaction..." });
+    const toastId = showToast({ type: "loading", title: "Placing Bid", message: "Submitting transaction..." });
     try {
       const hash = await submitPlaceBid(wallet.address, amount);
+      removeToast(toastId);
       setBidTx({ status: "success", message: `Bid of ${amount} XLM placed!`, hash });
       showToast({ 
         type: "success", 
@@ -373,6 +374,7 @@ export default function LiveHubDashboard({ wallet }: LiveHubDashboardProps) {
       setBidAmount("");
       optimisticBid(wallet.address, amount);
     } catch (err) {
+      removeToast(toastId);
       const errMsg = classifyError(err);
       setBidTx({ status: "failed", message: errMsg });
       showToast({ type: "error", title: "Bid Failed", message: errMsg });
@@ -388,9 +390,10 @@ export default function LiveHubDashboard({ wallet }: LiveHubDashboardProps) {
       return;
     }
     setVoteTx({ status: "pending", message: `Submitting ${voteYes ? "YES" : "NO"} vote…` });
-    showToast({ type: "loading", title: "Casting Vote", message: "Submitting transaction..." });
+    const toastId = showToast({ type: "loading", title: "Casting Vote", message: "Submitting transaction..." });
     try {
       const hash = await submitVote(wallet.address, voteYes);
+      removeToast(toastId);
       setVoteTx({
         status: "success",
         message: `Vote "${voteYes ? "YES" : "NO"}" recorded!`,
@@ -404,6 +407,7 @@ export default function LiveHubDashboard({ wallet }: LiveHubDashboardProps) {
       });
       optimisticVote(wallet.address, voteYes);
     } catch (err) {
+      removeToast(toastId);
       const errMsg = classifyError(err);
       setVoteTx({ status: "failed", message: errMsg });
       showToast({ type: "error", title: "Vote Failed", message: errMsg });
@@ -425,9 +429,10 @@ export default function LiveHubDashboard({ wallet }: LiveHubDashboardProps) {
       return;
     }
     setPaymentTx({ status: "pending", message: "Recording payment on-chain…" });
-    showToast({ type: "loading", title: "Tracking Payment", message: "Submitting transaction..." });
+    const toastId = showToast({ type: "loading", title: "Tracking Payment", message: "Submitting transaction..." });
     try {
       const hash = await submitTrackPayment(wallet.address, amount);
+      removeToast(toastId);
       setPaymentTx({ status: "success", message: `Payment of ${amount} XLM tracked!`, hash });
       showToast({ 
         type: "success", 
@@ -438,6 +443,7 @@ export default function LiveHubDashboard({ wallet }: LiveHubDashboardProps) {
       setPaymentAmount("");
       optimisticPayment(wallet.address, amount);
     } catch (err) {
+      removeToast(toastId);
       const errMsg = classifyError(err);
       setPaymentTx({ status: "failed", message: errMsg });
       showToast({ type: "error", title: "Payment Tracking Failed", message: errMsg });
