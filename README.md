@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Stellar LiveHub
 
-## Getting Started
+**Stellar LiveHub** is a decentralized real-time platform built on Stellar Soroban. 
+It provides an interactive, live dashboard for participating in on-chain auctions, voting in polls, and tracking payments—all synchronized in real time with the Stellar testnet without requiring manual page refreshes.
 
-First, run the development server:
+## 🚀 Core Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Live Auction Bidding:** Place bids and instantly see the highest bidder update across all connected clients.
+- **Live Polls:** Cast your vote and watch the real-time aggregate of YES/NO votes.
+- **Payment Tracking:** Record payments on-chain.
+- **Real-time Activity Feed:** A live feed displaying all recent contract interactions with a CSS-animated slide-in effect.
+- **Dynamic Leaderboard:** Users are automatically scored based on their activity (Bids = 3 pts, Payments = 2 pts, Votes = 1 pt).
+- **Global Toast Notifications:** Real-time feedback for all interactions, including direct links to Stellar Expert for transaction verification.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠 Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Framework:** [Next.js 16 (App Router)](https://nextjs.org/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Smart Contract:** [Stellar Soroban](https://soroban.stellar.org/)
+- **Wallet Integration:** [Stellar Wallets Kit](https://github.com/creit-tech/stellar-wallets-kit)
+- **Styling:** [TailwindCSS 4](https://tailwindcss.com/)
+- **Icons:** [Lucide React](https://lucide.dev/)
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 💻 Local Setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Follow these steps to run the project locally.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Install Dependencies**
+   ```bash
+   npm install
+   ```
 
-## Deploy on Vercel
+2. **Environment Setup**
+   Ensure you have a `.env.local` file (optional if relying on defaults):
+   ```env
+   NEXT_PUBLIC_CONTRACT_ID=CBEJ2TREGJ6MC6SII7QZUEPV45RHILA4J74DBXGJVCIMWYXYCGNFQJLR
+   NEXT_PUBLIC_SOROBAN_RPC_URL=https://soroban-testnet.stellar.org
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. **Run Development Server**
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📄 Contract Information
+
+The smart contract is deployed on the **Stellar Testnet**.
+
+- **Contract ID:**
+  ```txt
+  CBEJ2TREGJ6MC6SII7QZUEPV45RHILA4J74DBXGJVCIMWYXYCGNFQJLR
+  ```
+- **Network:** Testnet
+- **Explorer:** [View on Stellar Expert](https://stellar.expert/explorer/testnet/contract/CBEJ2TREGJ6MC6SII7QZUEPV45RHILA4J74DBXGJVCIMWYXYCGNFQJLR)
+
+---
+
+## 📸 Screenshots
+
+### Wallet Options Available
+![Wallet Options](https://via.placeholder.com/800x400?text=Wallet+Options+Available)
+
+### Connected Wallet State
+![Connected Wallet](https://via.placeholder.com/800x400?text=Connected+Wallet+State)
+
+### Transaction Success & Notification
+![Transaction Success](https://via.placeholder.com/800x400?text=Transaction+Success+Toast+Notification)
+
+### Live Dashboard
+![Live Dashboard](https://via.placeholder.com/800x400?text=Live+Dashboard+Overview)
+
+### Realtime Leaderboard
+![Leaderboard](https://via.placeholder.com/800x400?text=Realtime+Leaderboard)
+
+### Activity Feed
+![Activity Feed](https://via.placeholder.com/800x400?text=Realtime+Activity+Feed)
+
+---
+
+## 🔍 Transaction Verification
+
+All transactions executed via the UI can be verified directly on the Stellar testnet.
+
+- **Sample Transaction Hash:**
+  `0x... (Your transaction hash here)`
+- **Verification Link:**
+  [Stellar Expert Explorer](https://stellar.expert/explorer/testnet)
+
+---
+
+## 🌐 Live Demo
+
+- **Deployed Frontend URL:** [Deploy to Vercel and paste link here]
+
+---
+
+## ✅ Final Submission Checklist
+
+- [x] multi-wallet integration
+- [x] deployed smart contract
+- [x] realtime events
+- [x] transaction tracking
+- [x] leaderboard updates
+- [x] activity feed
+- [x] wallet error handling
+- [x] contract interaction from frontend
