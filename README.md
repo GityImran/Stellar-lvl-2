@@ -65,22 +65,22 @@ The smart contract is deployed on the **Stellar Testnet**.
 ## 📸 Screenshots
 
 ### Wallet Options Available
-![Wallet Options](/screenshots/wallet-options.png)
+![Wallet Options](/public/screenshots/wallet-options.png)
 
 ### Connected Wallet State
-![Connected Wallet](/screenshots/connected-wallet.png)
+![Connected Wallet](/public/screenshots/connected-wallet.png)
 
 ### Transaction Success & Notification
-![Transaction Success](/screenshots/transaction-success.png)
+![Transaction Success](/public/screenshots/transaction-success.png)
 
 ### Live Dashboard
-![Live Dashboard](/screenshots/live-dashboard.png)
+![Live Dashboard](/public/screenshots/live-dashboard.png)
 
 ### Realtime Leaderboard
-![Leaderboard](/screenshots/leaderboard.png)
+![Leaderboard](/public/screenshots/leaderboard.png)
 
 ### Activity Feed
-![Activity Feed](/screenshots/activity-feed.png)
+![Activity Feed](/public/screenshots/activity-feed.png)
 
 ---
 
